@@ -1,0 +1,2 @@
+# Koneksi ke Standby menggunakan port 5433
+psql -h localhost -p 5433 -U user -d mydatabase -c "SELECT * FROM test_sync;"
