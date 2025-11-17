@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  primary_db:
+    image: postgres:15-alpine
+    container_name: primary_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+      # Konfigurasi Replication
+      # WAL (Write-Ahead Log) level harus replica atau lebih tinggi
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256" 
+    ports:
+      - "5432:5432"
+    volumes:
+      - primary_data:/var/lib/postgresql/data
+      - ./primary_conf:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - postgres_net
+
+  standby_db:
+    image: postgres:15-alpine
+    container_name: standby_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+      # Variabel ini akan memicu inisialisasi sebagai Standby
+      PGPRIMARYHOST: primary_db
+      PGPRIMARYUSER: replicator
+      PGPRIMARYPORT: 5432
+      PGPASSWORD: password # Password untuk user replicator
+    ports:
+      - "5433:5432"
+    volumes:
+      - standby_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      primary_db:
+        condition: service_healthy
+    networks:
+      - postgres_net
+
+networks:
+  postgres_net:
+
+volumes:
+  primary_data:
+  standby_data:
