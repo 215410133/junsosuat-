@@ -1,0 +1,2 @@
+docker exec -it primary_db psql -U user -d mydatabase -c "CREATE TABLE test_sync (id int, data text);"
+docker exec -it primary_db psql -U user -d mydatabase -c "INSERT INTO test_sync VALUES (1, 'Data dari Primary');"
