@@ -39,7 +39,7 @@ Basically Available dari BASE selaras dengan Availability dari CAP.
 
 Eventual Consistency dari BASE adalah konsekuensi dari memilih Availability dan mengorbankan Strong Consistency selama partisi jaringan.
 
-💡 Contoh Penggunaan
+Contoh Penggunaan
 Saya pernah menggunakan MongoDB dalam arsitektur yang sangat terdistribusi.
 
 Pada dasarnya, MongoDB adalah sistem yang cenderung CP. Ketika menggunakan Replica Set tanpa sharding yang ketat, Primary node harus mengonfirmasi penulisan sebelum replica mencerminkannya, dan jika primary gagal, pemilihan primary baru dapat menyebabkan downtime singkat (mengorbankan A untuk C).
@@ -96,7 +96,7 @@ Keterangan Diagram:
 1. Teorema CAP dan BASE
 Teorema CAP dan BASE adalah konsep fundamental dalam desain sistem terdistribusi, terutama dalam konteks basis data.
 
-📜 Teorema CAP (Consistency, Availability, Partition Tolerance)
+Teorema CAP (Consistency, Availability, Partition Tolerance)
 Teorema CAP, juga dikenal sebagai Teorema Brewer, menyatakan bahwa sistem terdistribusi tidak mungkin secara bersamaan menjamin tiga properti berikut:
 
 Consistency (Konsistensi): Setiap pembacaan akan menerima data yang paling baru ditulis atau mendapatkan error. Dalam sistem terdistribusi, ini berarti semua node harus melihat data yang sama pada saat yang sama.
@@ -113,7 +113,7 @@ Pilih A dan P (AP System): Jika terjadi partisi, sistem akan terus menerima perm
 
 
 Shutterstock
-🧱 Prinsip BASE (Basically Available, Soft State, Eventual Consistency)
+Prinsip BASE (Basically Available, Soft State, Eventual Consistency)
 BASE adalah filosofi desain yang sering dianut oleh sistem AP (seperti NoSQL) sebagai alternatif terhadap ACID (yang terkait erat dengan sistem CP). BASE merupakan akronim dari:
 
 Basically Available (Tersedia Secara Dasar): Sistem menjamin ketersediaan. Kegagalan sebagian mungkin terjadi, tetapi sistem secara keseluruhan tetap responsif. Ini selaras dengan properti Availability (A) dari CAP.
@@ -131,7 +131,7 @@ Basically Available dari BASE selaras dengan Availability dari CAP.
 
 Eventual Consistency dari BASE adalah konsekuensi dari memilih Availability dan mengorbankan Strong Consistency selama partisi jaringan.
 
-💡 Contoh Penggunaan
+Contoh Penggunaan
 Saya pernah menggunakan MongoDB dalam arsitektur yang sangat terdistribusi.
 
 Pada dasarnya, MongoDB adalah sistem yang cenderung CP. Ketika menggunakan Replica Set tanpa sharding yang ketat, Primary node harus mengonfirmasi penulisan sebelum replica mencerminkannya, dan jika primary gagal, pemilihan primary baru dapat menyebabkan downtime singkat (mengorbankan A untuk C).
@@ -141,7 +141,7 @@ Namun, ketika diimplementasikan dengan Sharding, MongoDB dapat dikonfigurasi unt
 2. GraphQL dan Komunikasi Antar Proses (IPC)
 GraphQL adalah bahasa kueri untuk API dan runtime untuk memenuhi kueri tersebut dengan data yang sudah ada. Meskipun sering digunakan untuk komunikasi Client-Server, GraphQL juga memiliki keterkaitan penting dalam komunikasi antar proses (Inter-Process Communication/IPC) dalam sistem terdistribusi, terutama dalam arsitektur Microservices.
 
-🤝 Keterkaitan GraphQL dan IPC dalam Microservices
+Keterkaitan GraphQL dan IPC dalam Microservices
 Dalam arsitektur microservices, aplikasi dibagi menjadi layanan-layanan kecil yang independen (proses) yang berkomunikasi satu sama lain. GraphQL bertindak sebagai lapisan Agregator Data atau API Gateway yang menyederhanakan dan mengoptimalkan bagaimana klien (atau proses lain) mendapatkan data dari berbagai microservices.
 
 Peran GraphQL:
@@ -152,7 +152,7 @@ Efficient Data Fetching (No Over/Under Fetching): GraphQL memungkinkan klien unt
 
 Schema Stitching/Federation: Dalam implementasi yang lebih canggih, GraphQL dapat menggabungkan (stitch) schema dari berbagai microservice yang berbeda (setiap microservice mengekspos endpoint GraphQL-nya sendiri) menjadi schema terpadu tunggal. Klien hanya berinteraksi dengan schema terpadu, sementara komunikasi IPC internal (antar microservice dan Gateway) menangani resolusi field.
 
-📊 Diagram Keterkaitan
+Diagram Keterkaitan
 Cuplikan kode
 
 graph TD
