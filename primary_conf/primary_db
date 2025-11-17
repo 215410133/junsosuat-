@@ -1,0 +1,1 @@
+docker exec -it primary_db psql -U user -d mydatabase -c "SELECT pid, usename, client_addr, application_name, state, sync_state FROM pg_stat_replication;"
